@@ -7,7 +7,7 @@
 
 void StartInstance(const Aws::String &instanceName, const Aws::String &ami_id, const Aws::String &sg_id, const Aws::String &key_name)
 {
-    // snippet-start:[ec2.cpp.create_instance.code]
+
     Aws::EC2::EC2Client ec2;
 
     Aws::EC2::Model::RunInstancesRequest run_request;
@@ -31,7 +31,6 @@ void StartInstance(const Aws::String &instanceName, const Aws::String &ami_id, c
         std::cout << "Failed to start ec2 instance " << instanceName << " based on ami " << ami_id << ":" << run_outcome.GetError().GetMessage() << std::endl;
         return;
     }
-    // snippet-end:[ec2.cpp.create_instance.code]
 
     auto instance_id = instances[0].GetInstanceId();
 
