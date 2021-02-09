@@ -1,6 +1,0 @@
-[submodule "source/opt/cpr"]
-	path = source/opt/cpr
-	url = git://github.com/whoshuu/cpr.git
-[submodule "source/opt/json"]
-	path = source/opt/json
-	url = git://github.com/nlohmann/json.git
