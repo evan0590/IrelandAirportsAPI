@@ -17,6 +17,9 @@ endforeach()
 
 add_subdirectory(opt)
 
+add_executable(test_json test_json.cpp)
+
 add_executable(query_api query_api.cpp)
 target_link_libraries(query_api ${CPR_LIBRARIES})
 include_directories(${CPR_INCLUDE_DIRS} ${JSON_INCLUDE_DIRS})
+
