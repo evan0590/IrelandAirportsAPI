@@ -1,8 +1,0 @@
-.DS_Store
-.vscode
-
-# local directories
-/notes
-/build
-
-/source/opt/
