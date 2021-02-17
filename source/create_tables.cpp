@@ -45,10 +45,7 @@ int main(int argc, char **argv)
         PQclear(res);
         exit_nicely(conn);
     }
-    /*
-     * Should PQclear PGresult whenever it is no longer needed to avoid memory
-     * leaks
-     */
+    /* Should PQclear PGresult whenever it is no longer needed to avoid memory leaks */
     PQclear(res);
 
     /* close the connection to the database and cleanup */
