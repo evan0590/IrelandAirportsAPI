@@ -5,7 +5,6 @@ set (CMAKE_CXX_STANDARD 11)
 # Locate the aws sdk for c++ package.
 find_package(AWSSDK REQUIRED COMPONENTS ec2 rds)
 
-
 set(EXAMPLES "")
 list(APPEND EXAMPLES "create_instance")
 list(APPEND EXAMPLES "create_database")
@@ -17,8 +16,6 @@ foreach(EXAMPLE IN LISTS EXAMPLES)
 endforeach()
 
 add_subdirectory(opt)
-
-add_executable(flight_data_scraper flight_data_scraper.cpp)
 
 add_executable(query_api query_api.cpp)
 target_link_libraries(query_api ${CPR_LIBRARIES})
