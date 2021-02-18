@@ -53,19 +53,19 @@ int main(int argc, char **argv)
         Aws::String db_name = argv[1];
 
         /*
-        * The user must supply a first parameter on the command line to be used as the db_instance_identifier string.
+        * The user must supply a second parameter on the command line to be used as the db_instance_identifier string.
         * example db_instance_identifier string: "test"
         */
         Aws::String db_instance_identifier = argv[2];
 
         /*
-        * The user must supply a first parameter on the command line to be used as the master_user_password string.
+        * The user must supply a third parameter on the command line to be used as the master_user_password string.
         * example master_user_password string: "password1"
         */
         Aws::String master_user_password = argv[3];
 
         /*
-        * The user must supply a first parameter on the command line to be used as the sg_id string.
+        * The user must supply a fourth parameter on the command line to be used as the sg_id string.
         * example sg_id string: "sg-70987as09879087d3"
         */
         Aws::String sg_id = argv[4];
