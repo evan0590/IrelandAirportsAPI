@@ -26,17 +26,20 @@ int main(int argc, char **argv)
      */
     airportiata = argv[3];
 
-    // make request to the api with the given parameters
+    /* make request to the api with the given parameters */
     cpr::Response response = cpr::Get(cpr::Url{"http://api.aviationstack.com/v1/flights"},
                                       cpr::Parameters{{"access_key", apikey},
                                                       {deparriata, airportiata}});
     auto json = nlohmann::json::parse(response.text);
 
-    // convert parameters to strings for naming json files
-    std::string deparriata_s = airportiata;
-    std::string airportiata_s = deparriata;
+    /* convert char array parameters to strings for naming json files */
+    std::string deparriata_s = deparriata;
+    std::string airportiata_s = airportiata;
     std::ofstream file;
-    // create a json file to store the queried information
+
+    // TODO - add mkdir json if directory is not there
+
+    /* create a json file to store the queried information */
     file.open("./json/" + deparriata_s + "_" + airportiata_s + ".json");
     file << json;
     file.close();

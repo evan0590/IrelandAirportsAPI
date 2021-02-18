@@ -19,6 +19,4 @@ add_subdirectory(opt)
 
 add_executable(query_api query_api.cpp)
 target_link_libraries(query_api ${CPR_LIBRARIES})
-add_executable(query_api_copy query_api_copy.cpp)
-target_link_libraries(query_api_copy ${CPR_LIBRARIES})
 include_directories(${CPR_INCLUDE_DIRS} ${JSON_INCLUDE_DIRS})

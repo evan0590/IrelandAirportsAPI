@@ -5,9 +5,8 @@
 #include <aws/ec2/model/RunInstancesResponse.h>
 #include <iostream>
 
-void StartInstance(const Aws::String &instanceName, const Aws::String &ami_id, const Aws::String &sg_id, const Aws::String &key_name)
+void StartInstance(const Aws::String &instance_name, const Aws::String &ami_id, const Aws::String &sg_id, const Aws::String &key_name)
 {
-    // snippet-start:[ec2.cpp.create_instance.code]
     Aws::EC2::EC2Client ec2;
 
     Aws::EC2::Model::RunInstancesRequest run_request;
@@ -21,23 +20,22 @@ void StartInstance(const Aws::String &instanceName, const Aws::String &ami_id, c
     auto run_outcome = ec2.RunInstances(run_request);
     if (!run_outcome.IsSuccess())
     {
-        std::cout << "Failed to start ec2 instance " << instanceName << " based on ami " << ami_id << ":" << run_outcome.GetError().GetMessage() << std::endl;
+        std::cout << "Failed to start ec2 instance " << instance_name << " based on ami " << ami_id << ":" << run_outcome.GetError().GetMessage() << std::endl;
         return;
     }
 
     const auto &instances = run_outcome.GetResult().GetInstances();
     if (instances.size() == 0)
     {
-        std::cout << "Failed to start ec2 instance " << instanceName << " based on ami " << ami_id << ":" << run_outcome.GetError().GetMessage() << std::endl;
+        std::cout << "Failed to start ec2 instance " << instance_name << " based on ami " << ami_id << ":" << run_outcome.GetError().GetMessage() << std::endl;
         return;
     }
-    // snippet-end:[ec2.cpp.create_instance.code]
 
     auto instance_id = instances[0].GetInstanceId();
 
     Aws::EC2::Model::Tag name_tag;
     name_tag.SetKey("Name");
-    name_tag.SetValue(instanceName);
+    name_tag.SetValue(instance_name);
 
     Aws::EC2::Model::CreateTagsRequest create_request;
     create_request.AddResources(instance_id);
@@ -46,11 +44,11 @@ void StartInstance(const Aws::String &instanceName, const Aws::String &ami_id, c
     auto create_outcome = ec2.CreateTags(create_request);
     if (!create_outcome.IsSuccess())
     {
-        std::cout << "Failed to tag ec2 instance " << instance_id << " with name " << instanceName << ":" << create_outcome.GetError().GetMessage() << std::endl;
+        std::cout << "Failed to tag ec2 instance " << instance_id << " with name " << instance_name << ":" << create_outcome.GetError().GetMessage() << std::endl;
         return;
     }
 
-    std::cout << "Successfully started ec2 instance " << instanceName << " based on ami " << ami_id << std::endl;
+    std::cout << "Successfully started ec2 instance " << instance_name << " based on ami " << ami_id << std::endl;
 }
 
 /**
@@ -68,12 +66,33 @@ int main(int argc, char **argv)
     Aws::SDKOptions options;
     Aws::InitAPI(options);
     {
-        Aws::String instanceName = argv[1];
+        /*
+        * The user must supply a first parameter on the command line to be used as the instance_name string.
+        * example instance_name string: "test"
+        */
+        Aws::String instance_name = argv[1];
+
+        /*
+        * The user must supply a second parameter on the command line to be used as the ami_id string.
+        * example ami_id string: "ami-06fd8a495a537da8b"
+        */
         Aws::String ami_id = argv[2];
+
+        /*
+        * The user must supply a third parameter on the command line to be used as the sg_id string.
+        * example sg_id string: "sg-70987as09879087d3"
+        */
         Aws::String sg_id = argv[3];
+
+        /*
+        * The user must supply a fourth parameter on the command line to be used as the key_name string.
+        * example key_name string: "aws-key-pair"
+        */
         Aws::String key_name = argv[4];
-        StartInstance(instanceName, ami_id, sg_id, key_name);
+
+        StartInstance(instance_name, ami_id, sg_id, key_name);
     }
+
     Aws::ShutdownAPI(options);
     return 0;
 }
