@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 
     /*
      * The user must supply a second parameter on the command line to be used as the createTable string.
-     * example createTable string: "CREATE TABLE example(example_id integer, example_text varchar (100));"
+     * example createTable string: "CREATE TABLE example(example_id integer primary key, example_text varchar (100));"
      */
     createTable = argv[2];
     res = PQexec(conn, createTable);

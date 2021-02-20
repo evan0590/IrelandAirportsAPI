@@ -3,6 +3,33 @@
 
 # local directories
 /notes
-/build
+/database/build
 
-/source/opt/
+/database/source/opt/
+
+
+/api/config
+/api/.qmake.stash
+/api/Makefile
+
+/api/controllers/.obj
+/api/controllers/Makefile
+
+/api/db
+
+/api/helpers/.obj
+/api/helpers/Makefile
+
+/api/lib
+/api/log
+
+api/models/.obj
+api/models/Makefile
+
+/api/plugin
+/api/public
+/api/script
+/api/sql
+/api/test
+
+api/views/

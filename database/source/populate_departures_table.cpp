@@ -38,31 +38,94 @@ int main(int argc, char **argv)
     /*  Convert parameter to string for accessing json file name */
     std::string airportiata_s = airportiata;
     /*  Open the relevant json file and parse the data within */
-    std::ifstream file("./json/arr_iata_" + airportiata_s + ".json");
+    std::ifstream file("./json/dep_iata_" + airportiata_s + ".json");
     json j = json::parse(file);
     json parsed = j["data"];
 
     /* Iterate the parsed data and write the information to the table */
     for (int i = 0; i < parsed.size(); i++)
     {
-        /* Retrieve the string value */
-        std::string arrival_airport_s = parsed[i]["arrival"]["airport"].get<std::string>();
-        std::string departure_airport_s = parsed[i]["departure"]["airport"].get<std::string>();
-        std::string airline_name_s = parsed[i]["airline"]["name"].get<std::string>();
-        std::string flight_iata_s = parsed[i]["flight"]["iata"].get<std::string>();
-        std::string flight_date_s = parsed[i]["flight_date"].get<std::string>();
-        std::string arrival_scheduled_s = parsed[i]["arrival"]["scheduled"].get<std::string>();
-        std::string departure_scheduled_s = parsed[i]["departure"]["scheduled"].get<std::string>();
+        /* Retrieve the string value, and handle for null pointers */
+        std::string arrival_airport_s;
+        if (parsed[i]["arrival"]["airport"] == nullptr)
+        {
+            arrival_airport_s = "empty";
+        }
+        else
+        {
+            arrival_airport_s = parsed[i]["arrival"]["airport"].get<std::string>();
+        }
+
+        std::string departure_airport_s;
+        if (parsed[i]["departure"]["airport"] == nullptr)
+        {
+            departure_airport_s = "empty";
+        }
+        else
+        {
+            departure_airport_s = parsed[i]["departure"]["airport"].get<std::string>();
+        }
+
+        std::string airline_name_s;
+        if (parsed[i]["airline"]["name"] == nullptr)
+        {
+            airline_name_s = "empty";
+        }
+        else
+        {
+            airline_name_s = parsed[i]["airline"]["name"].get<std::string>();
+        }
+
+        std::string flight_iata_s;
+        if (parsed[i]["flight"]["iata"] == nullptr)
+        {
+
+            flight_iata_s = "empty";
+        }
+        else
+        {
+            flight_iata_s = parsed[i]["flight"]["iata"].get<std::string>();
+        }
+
+        std::string flight_date_s;
+        if (parsed[i]["flight_date"] == nullptr)
+        {
+            flight_date_s = "empty";
+        }
+        else
+        {
+            flight_date_s = parsed[i]["flight_date"].get<std::string>();
+        }
+
+        std::string arrival_scheduled_s;
+        if (parsed[i]["arrival"]["scheduled"] == nullptr)
+        {
+            arrival_scheduled_s = "empty";
+        }
+        else
+        {
+            arrival_scheduled_s = parsed[i]["arrival"]["scheduled"].get<std::string>();
+        }
+
+        std::string departure_scheduled_s;
+        if (parsed[i]["departure"]["scheduled"] == nullptr)
+        {
+            departure_scheduled_s = "empty";
+        }
+        else
+        {
+            departure_scheduled_s = parsed[i]["departure"]["scheduled"].get<std::string>();
+        }
 
         /* SQL command */
-        const char command[] = "INSERT INTO arrivals(airport, airline_name, flight_iata, flight_date, "
-                               "arrival_scheduled, departure_airport, departure_scheduled) "
+        const char command[] = "INSERT INTO departures(airport, airline_name, flight_iata, flight_date, "
+                               "departure_scheduled, arrival_airport, arrival_scheduled) "
                                "values($1, $2, $3, $4, $5, $6, $7);";
 
         /* Parse string values to char arrays */
         char airport[50];
-        strcpy(airport, arrival_airport_s.c_str());
-        airport[arrival_airport_s.size()] = '\0';
+        strcpy(airport, departure_airport_s.c_str());
+        airport[departure_airport_s.size()] = '\0';
 
         char airline_name[100];
         strcpy(airline_name, airline_name_s.c_str());
@@ -80,9 +143,9 @@ int main(int argc, char **argv)
         strcpy(departure_scheduled, departure_scheduled_s.c_str());
         departure_scheduled[departure_scheduled_s.size()] = '\0';
 
-        char departure_airport[50];
-        strcpy(departure_airport, departure_airport_s.c_str());
-        departure_airport[departure_airport_s.size()] = '\0';
+        char arrival_airport[50];
+        strcpy(arrival_airport, arrival_airport_s.c_str());
+        arrival_airport[arrival_airport_s.size()] = '\0';
 
         char arrival_scheduled[50];
         strcpy(arrival_scheduled, arrival_scheduled_s.c_str());
@@ -90,10 +153,10 @@ int main(int argc, char **argv)
 
         int nParams = 7;
         const char *const paramValues[7] = {airport, airline_name, flight_iata,
-                                            flight_date, arrival_scheduled, departure_airport, departure_scheduled};
+                                            flight_date, departure_scheduled, arrival_airport, arrival_scheduled};
         int paramLengths[7] = {sizeof(airport), sizeof(airline_name), sizeof(flight_iata),
                                sizeof(flight_date), sizeof(arrival_scheduled),
-                               sizeof(departure_airport), sizeof(departure_scheduled)};
+                               sizeof(arrival_airport), sizeof(departure_scheduled)};
         const int paramFormats[] = {0, 0, 0, 0, 0, 0, 0};
         int resultFormat = 0;
 
