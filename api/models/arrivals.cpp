@@ -2,22 +2,21 @@
 #include "arrivals.h"
 #include "sqlobjects/arrivalsobject.h"
 
-Arrivals::Arrivals() :
-    TAbstractModel(),
-    d(new ArrivalsObject())
+Arrivals::Arrivals() : TAbstractModel(),
+                       d(new ArrivalsObject())
 {
     // set the initial parameters
 }
 
-Arrivals::Arrivals(const Arrivals &other) :
-    TAbstractModel(),
-    d(other.d)
-{ }
+Arrivals::Arrivals(const Arrivals &other) : TAbstractModel(),
+                                            d(other.d)
+{
+}
 
-Arrivals::Arrivals(const ArrivalsObject &object) :
-    TAbstractModel(),
-    d(new ArrivalsObject(object))
-{ }
+Arrivals::Arrivals(const ArrivalsObject &object) : TAbstractModel(),
+                                                   d(new ArrivalsObject(object))
+{
+}
 
 Arrivals::~Arrivals()
 {
@@ -33,6 +32,16 @@ QString Arrivals::airport() const
 void Arrivals::setAirport(const QString &airport)
 {
     d->airport = airport;
+}
+
+QString Arrivals::airportIata() const
+{
+    return d->airport_iata;
+}
+
+void Arrivals::setAirportIata(const QString &airportIata)
+{
+    d->airport_iata = airportIata;
 }
 
 QString Arrivals::airlineName() const
@@ -97,21 +106,23 @@ void Arrivals::setDepartureScheduled(const QString &departureScheduled)
 
 Arrivals &Arrivals::operator=(const Arrivals &other)
 {
-    d = other.d;  // increments the reference count of the data
+    d = other.d; // increments the reference count of the data
     return *this;
 }
 
-Arrivals Arrivals::create(const QString &airport, const QString &airlineName, const QString &flightIata, const QString &flightDate, const QString &arrivalScheduled, const QString &departureAirport, const QString &departureScheduled)
+Arrivals Arrivals::create(const QString &airport, const QString &airportIata, const QString &airlineName, const QString &flightIata, const QString &flightDate, const QString &arrivalScheduled, const QString &departureAirport, const QString &departureScheduled)
 {
     ArrivalsObject obj;
     obj.airport = airport;
+    obj.airport_iata = airportIata;
     obj.airline_name = airlineName;
     obj.flight_iata = flightIata;
     obj.flight_date = flightDate;
     obj.arrival_scheduled = arrivalScheduled;
     obj.departure_airport = departureAirport;
     obj.departure_scheduled = departureScheduled;
-    if (!obj.create()) {
+    if (!obj.create())
+    {
         return Arrivals();
     }
     return Arrivals(obj);
@@ -121,17 +132,85 @@ Arrivals Arrivals::create(const QVariantMap &values)
 {
     Arrivals model;
     model.setProperties(values);
-    if (!model.d->create()) {
+    if (!model.d->create())
+    {
         model.d->clear();
     }
     return model;
 }
 
-Arrivals Arrivals::get(const QString &flightIata)
+/* get functions - start */
+Arrivals Arrivals::getIata(const QString &flightIata)
 {
     TSqlORMapper<ArrivalsObject> mapper;
     return Arrivals(mapper.findByPrimaryKey(flightIata));
 }
+
+QJsonArray Arrivals::getAirportIata(const QString &airportIata)
+{
+    QJsonArray array;
+    TSqlORMapper<ArrivalsObject> mapper;
+
+    if (mapper.findBy(1, airportIata) > 0)
+    {
+        for (TSqlORMapperIterator<ArrivalsObject> i(mapper); i.hasNext();)
+        {
+            array.append(QJsonValue(QJsonObject::fromVariantMap(Arrivals(i.next()).toVariantMap())));
+        }
+    }
+    return array;
+}
+
+QJsonArray Arrivals::getAirlineName(const QString &airlineName)
+{
+    QJsonArray array;
+    TSqlORMapper<ArrivalsObject> mapper;
+
+    if (mapper.findBy(2, airlineName) > 0)
+    {
+        for (TSqlORMapperIterator<ArrivalsObject> i(mapper); i.hasNext();)
+        {
+            array.append(QJsonValue(QJsonObject::fromVariantMap(Arrivals(i.next()).toVariantMap())));
+        }
+    }
+    return array;
+}
+
+QJsonArray Arrivals::getDate(const QString &flightDate)
+{
+    QJsonArray array;
+    TSqlORMapper<ArrivalsObject> mapper;
+
+    if (mapper.findBy(4, flightDate) > 0)
+    {
+        for (TSqlORMapperIterator<ArrivalsObject> i(mapper); i.hasNext();)
+        {
+            array.append(QJsonValue(QJsonObject::fromVariantMap(Arrivals(i.next()).toVariantMap())));
+        }
+    }
+    return array;
+}
+
+// Reading ORM Object by Specifying the Search Criteria - combine and apply multiple conditions
+QJsonArray Arrivals::getAirportByDate(const QString &airportIata, const QString &flightDate)
+{
+    TCriteria crt(ArrivalsObject::AirportIata, airportIata);
+    crt.add(ArrivalsObject::FlightDate, TSql::Equal, flightDate); // AND add to the end operator
+
+    QJsonArray array;
+    TSqlORMapper<ArrivalsObject> mapper;
+
+    if (mapper.find(crt) > 0)
+    {
+        for (TSqlORMapperIterator<ArrivalsObject> i(mapper); i.hasNext();)
+        {
+            array.append(QJsonValue(QJsonObject::fromVariantMap(Arrivals(i.next()).toVariantMap())));
+        }
+    }
+    return array;
+}
+
+/* get functions - end */
 
 int Arrivals::count()
 {
@@ -149,8 +228,10 @@ QJsonArray Arrivals::getAllJson()
     QJsonArray array;
     TSqlORMapper<ArrivalsObject> mapper;
 
-    if (mapper.find() > 0) {
-        for (TSqlORMapperIterator<ArrivalsObject> i(mapper); i.hasNext(); ) {
+    if (mapper.find() > 0)
+    {
+        for (TSqlORMapperIterator<ArrivalsObject> i(mapper); i.hasNext();)
+        {
             array.append(QJsonValue(QJsonObject::fromVariantMap(Arrivals(i.next()).toVariantMap())));
         }
     }

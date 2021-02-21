@@ -117,15 +117,29 @@ int main(int argc, char **argv)
             departure_scheduled_s = parsed[i]["departure"]["scheduled"].get<std::string>();
         }
 
+        std::string airport_iata_s;
+        if (parsed[i]["arrival"]["iata"] == nullptr)
+        {
+            airport_iata_s = "empty";
+        }
+        else
+        {
+            airport_iata_s = parsed[i]["arrival"]["iata"].get<std::string>();
+        }
+
         /* SQL command */
-        const char command[] = "INSERT INTO arrivals(airport, airline_name, flight_iata, flight_date, "
-                               "arrival_scheduled, departure_airport, departure_scheduled) "
-                               "values($1, $2, $3, $4, $5, $6, $7);";
+        const char command[] = "INSERT INTO arrivals(airport, airport_iata, airline_name, flight_iata, "
+                               "flight_date, arrival_scheduled, departure_airport, departure_scheduled) "
+                               "values($1, $2, $3, $4, $5, $6, $7, $8);";
 
         /* Parse string values to char arrays */
         char airport[50];
         strcpy(airport, arrival_airport_s.c_str());
         airport[arrival_airport_s.size()] = '\0';
+
+        char airport_iata[25];
+        strcpy(airport_iata, airport_iata_s.c_str());
+        airport_iata[airport_iata_s.size()] = '\0';
 
         char airline_name[100];
         strcpy(airline_name, airline_name_s.c_str());
@@ -151,13 +165,13 @@ int main(int argc, char **argv)
         strcpy(arrival_scheduled, arrival_scheduled_s.c_str());
         arrival_scheduled[arrival_scheduled_s.size()] = '\0';
 
-        int nParams = 7;
-        const char *const paramValues[7] = {airport, airline_name, flight_iata,
+        int nParams = 8;
+        const char *const paramValues[8] = {airport, airport_iata, airline_name, flight_iata,
                                             flight_date, arrival_scheduled, departure_airport, departure_scheduled};
-        int paramLengths[7] = {sizeof(airport), sizeof(airline_name), sizeof(flight_iata),
+        int paramLengths[8] = {sizeof(airport), sizeof(airport_iata), sizeof(airline_name), sizeof(flight_iata),
                                sizeof(flight_date), sizeof(arrival_scheduled),
                                sizeof(departure_airport), sizeof(departure_scheduled)};
-        const int paramFormats[] = {0, 0, 0, 0, 0, 0, 0};
+        const int paramFormats[] = {0, 0, 0, 0, 0, 0, 0, 0};
         int resultFormat = 0;
 
         /* PQexecParams */

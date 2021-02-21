@@ -3,18 +3,36 @@
 
 void DeparturesController::index()
 {
-    // auto departuresList = Departures::getAll();
-    // texport(departuresList);
-    // render();
     renderJson(Departures::getAllJson());
 }
 
-void DeparturesController::show(const QString &flightIata)
+/* get functions - start */
+void DeparturesController::iata(const QString &flightIata)
 {
-    auto departures = Departures::get(flightIata);
-    texport(departures);
-    render();
+    Departures departure = Departures::getIata(flightIata);
+    renderJson(departure.toVariantMap());
 }
+
+void DeparturesController::date(const QString &flightDate)
+{
+    renderJson(Departures::getDate(flightDate));
+}
+
+void DeparturesController::airport(const QString &airportIata)
+{
+    renderJson(Departures::getAirportIata(airportIata));
+}
+
+void DeparturesController::airline(const QString &airlineName)
+{
+    renderJson(Departures::getAirlineName(airlineName));
+}
+
+void DeparturesController::airportdate(const QString &airportIata, const QString &flightDate)
+{
+    renderJson(Departures::getAirportByDate(airportIata, flightDate));
+}
+/* get functions - end */
 
 void DeparturesController::create()
 {
@@ -57,7 +75,7 @@ void DeparturesController::save(const QString &flightIata)
     {
     case Tf::Get:
     {
-        auto model = Departures::get(flightIata);
+        auto model = Departures::getIata(flightIata);
         if (!model.isNull())
         {
             auto departures = model.toVariantMap();
@@ -70,7 +88,7 @@ void DeparturesController::save(const QString &flightIata)
     case Tf::Post:
     {
         QString error;
-        auto model = Departures::get(flightIata);
+        auto model = Departures::getIata(flightIata);
 
         if (model.isNull())
         {
@@ -112,7 +130,7 @@ void DeparturesController::remove(const QString &flightIata)
         return;
     }
 
-    auto departures = Departures::get(flightIata);
+    auto departures = Departures::getIata(flightIata);
     departures.remove();
     redirect(urla("index"));
 }

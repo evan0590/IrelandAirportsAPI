@@ -12,7 +12,6 @@ class TModelObject;
 class DeparturesObject;
 class QJsonArray;
 
-
 class T_MODEL_EXPORT Departures : public TAbstractModel
 {
 public:
@@ -23,6 +22,8 @@ public:
 
     QString airport() const;
     void setAirport(const QString &airport);
+    QString airportIata() const;
+    void setAirportIata(const QString &airportIata);
     QString airlineName() const;
     void setAirlineName(const QString &airlineName);
     QString flightIata() const;
@@ -39,12 +40,20 @@ public:
 
     bool create() override { return TAbstractModel::create(); }
     bool update() override { return TAbstractModel::update(); }
-    bool save()   override { return TAbstractModel::save(); }
+    bool save() override { return TAbstractModel::save(); }
     bool remove() override { return TAbstractModel::remove(); }
 
-    static Departures create(const QString &airport, const QString &airlineName, const QString &flightIata, const QString &flightDate, const QString &departureScheduled, const QString &arrivalAirport, const QString &arrivalScheduled);
+    static Departures create(const QString &airport, const QString &airportIata, const QString &airlineName, const QString &flightIata, const QString &flightDate, const QString &departureScheduled, const QString &arrivalAirport, const QString &arrivalScheduled);
     static Departures create(const QVariantMap &values);
-    static Departures get(const QString &flightIata);
+
+    /* get functions - start */
+    static Departures getIata(const QString &flightIata);
+    static QJsonArray getAirportIata(const QString &airportIata);
+    static QJsonArray getAirlineName(const QString &airlineName);
+    static QJsonArray getDate(const QString &flightDate);
+    static QJsonArray getAirportByDate(const QString &airportIata, const QString &flightDate);
+    /* get functions - end */
+
     static int count();
     static QList<Departures> getAll();
     static QJsonArray getAllJson();
