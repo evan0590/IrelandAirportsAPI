@@ -20,9 +20,6 @@ public slots:
     void airportdate(const QString &airportIata, const QString &flightDate);
     /* get functions - end */
 
-    void create();
-    void save(const QString &flightIata);
-    void remove(const QString &flightIata);
 };
 
 #endif // DEPARTURESCONTROLLER_H

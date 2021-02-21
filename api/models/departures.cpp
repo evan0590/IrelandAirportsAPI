@@ -110,35 +110,6 @@ Departures &Departures::operator=(const Departures &other)
     return *this;
 }
 
-Departures Departures::create(const QString &airport, const QString &airportIata, const QString &airlineName, const QString &flightIata, const QString &flightDate, const QString &departureScheduled, const QString &arrivalAirport, const QString &arrivalScheduled)
-{
-    DeparturesObject obj;
-    obj.airport = airport;
-    obj.airport_iata = airportIata;
-    obj.airline_name = airlineName;
-    obj.flight_iata = flightIata;
-    obj.flight_date = flightDate;
-    obj.departure_scheduled = departureScheduled;
-    obj.arrival_airport = arrivalAirport;
-    obj.arrival_scheduled = arrivalScheduled;
-    if (!obj.create())
-    {
-        return Departures();
-    }
-    return Departures(obj);
-}
-
-Departures Departures::create(const QVariantMap &values)
-{
-    Departures model;
-    model.setProperties(values);
-    if (!model.d->create())
-    {
-        model.d->clear();
-    }
-    return model;
-}
-
 /* get functions - start */
 Departures Departures::getIata(const QString &flightIata)
 {
@@ -211,17 +182,6 @@ QJsonArray Departures::getAirportByDate(const QString &airportIata, const QStrin
 }
 
 /* get functions - end */
-
-int Departures::count()
-{
-    TSqlORMapper<DeparturesObject> mapper;
-    return mapper.findCount();
-}
-
-QList<Departures> Departures::getAll()
-{
-    return tfGetModelListByCriteria<Departures, DeparturesObject>(TCriteria());
-}
 
 QJsonArray Departures::getAllJson()
 {

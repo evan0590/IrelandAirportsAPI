@@ -7,7 +7,7 @@
 
 /database/source/opt/
 
-
+# treefrog files and directories
 /api/config
 /api/.qmake.stash
 /api/Makefile
@@ -27,8 +27,6 @@ api/models/.obj
 api/models/Makefile
 
 /api/plugin
-/api/public
-/api/script
 /api/sql
 /api/test
 

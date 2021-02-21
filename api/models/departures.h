@@ -38,14 +38,6 @@ public:
     void setArrivalScheduled(const QString &arrivalScheduled);
     Departures &operator=(const Departures &other);
 
-    bool create() override { return TAbstractModel::create(); }
-    bool update() override { return TAbstractModel::update(); }
-    bool save() override { return TAbstractModel::save(); }
-    bool remove() override { return TAbstractModel::remove(); }
-
-    static Departures create(const QString &airport, const QString &airportIata, const QString &airlineName, const QString &flightIata, const QString &flightDate, const QString &departureScheduled, const QString &arrivalAirport, const QString &arrivalScheduled);
-    static Departures create(const QVariantMap &values);
-
     /* get functions - start */
     static Departures getIata(const QString &flightIata);
     static QJsonArray getAirportIata(const QString &airportIata);
@@ -54,8 +46,6 @@ public:
     static QJsonArray getAirportByDate(const QString &airportIata, const QString &flightDate);
     /* get functions - end */
 
-    static int count();
-    static QList<Departures> getAll();
     static QJsonArray getAllJson();
 
 private:

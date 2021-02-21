@@ -25,7 +25,6 @@ set(CMAKE_AUTOMOC ON)
 find_package(TreeFrog REQUIRED)
 add_subdirectory(helpers)
 add_subdirectory(models)
-add_subdirectory(views)
 add_subdirectory(controllers)
 
 message(STATUS "Set CMAKE_GENERATOR: ${CMAKE_GENERATOR}")
