@@ -6,6 +6,8 @@
 #include <cpr/cpr.h>
 #include <json.hpp>
 
+namespace fs = std::filesystem;
+
 int main(int argc, char **argv)
 {
     const char *apikey;
