@@ -11,6 +11,7 @@
 /database/build
 /database/build-aws
 /database/build-api
+/database/build-postgres
 /database/build-postgres-api
 
 # treefrog files and directories
