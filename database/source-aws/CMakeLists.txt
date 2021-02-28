@@ -14,9 +14,3 @@ foreach(EXAMPLE IN LISTS EXAMPLES)
     add_executable(${EXAMPLE} ${EXAMPLE}.cpp)
     target_link_libraries(${EXAMPLE} ${AWSSDK_LINK_LIBRARIES})
 endforeach()
-
-add_subdirectory(opt)
-
-add_executable(query_api query_api.cpp)
-target_link_libraries(query_api ${CPR_LIBRARIES})
-include_directories(${CPR_INCLUDE_DIRS} ${JSON_INCLUDE_DIRS})

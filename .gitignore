@@ -1,11 +1,13 @@
 .DS_Store
 .vscode
 
-# local directories
+# local directories and builds
 /notes
 /database/build
+/database/build-postgres-api
+/database/build-aws
 
-/database/source/opt/
+/database/source-api/opt/
 
 # treefrog files and directories
 /api/config
