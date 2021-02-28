@@ -1,6 +1,9 @@
 .DS_Store
 .vscode
 
+# source directory not currently versioned
+/database/source-postgres-api
+
 # local directories and builds
 /notes
 /database/build
