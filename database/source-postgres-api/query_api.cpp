@@ -1,12 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cpr/cpr.h>
-#include <json.hpp>
 #include <cstdlib>
 #include <filesystem>
-
-namespace fs = std::filesystem;
+#include <cpr/cpr.h>
+#include <json.hpp>
 
 int main(int argc, char **argv)
 {

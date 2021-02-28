@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
-#include <nlohmann/json.hpp>
+#include <json.hpp>
 #include "libpq-fe.h"
 
 using json = nlohmann::json;
