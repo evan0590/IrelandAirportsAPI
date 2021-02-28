@@ -3,6 +3,10 @@
 #include <string>
 #include <cpr/cpr.h>
 #include <json.hpp>
+#include <cstdlib>
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 int main(int argc, char **argv)
 {
@@ -37,7 +41,8 @@ int main(int argc, char **argv)
     std::string airportiata_s = airportiata;
     std::ofstream file;
 
-    // TODO - add mkdir json if directory is not there
+    /* create a json directory if it doesn't already exist */
+    fs::create_directory("./json/");
 
     /* create a json file to store the queried information */
     file.open("./json/" + deparriata_s + "_" + airportiata_s + ".json");

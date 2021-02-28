@@ -1,16 +1,16 @@
 .DS_Store
 .vscode
 
-# source directory not currently versioned
+# source directories not currently versioned
 /database/source-postgres-api
+/database/source-api/opt/
 
-# local directories and builds
+# local and build directories
 /notes
 /database/build
-/database/build-postgres-api
 /database/build-aws
-
-/database/source-api/opt/
+/database/build-api
+/database/build-postgres-api
 
 # treefrog files and directories
 /api/config

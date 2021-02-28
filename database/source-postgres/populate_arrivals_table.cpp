@@ -7,13 +7,6 @@
 
 using json = nlohmann::json;
 
-static void
-exit_nicely(PGconn *conn)
-{
-    PQfinish(conn);
-    exit(1);
-}
-
 int main(int argc, char **argv)
 {
     const char *airportiata;
@@ -177,11 +170,13 @@ int main(int argc, char **argv)
         /* PQexecParams */
         res = PQexecParams(conn, command, nParams, NULL, paramValues, paramLengths,
                            paramFormats, resultFormat);
+
+        /* Error handling for when duplicate rows are encountered */
         if (PQresultStatus(res) != PGRES_COMMAND_OK)
         {
             fprintf(stderr, "SET failed: %s", PQerrorMessage(conn));
             PQclear(res);
-            exit_nicely(conn);
+            continue;
         }
         PQclear(res);
     }
