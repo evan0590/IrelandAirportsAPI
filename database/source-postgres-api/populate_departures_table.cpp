@@ -9,29 +9,36 @@ using json = nlohmann::json;
 
 int main(int argc, char **argv)
 {
+    const char *buildroute;
     const char *airportiata;
     const char *conninfo;
     PGconn *conn;
     PGresult *res;
 
     /*
+     * The user must supply a first parameter on the command line to be used as the buildroute string.
+     * example route string: "/home/ubuntu/IrelandAirportsAPI/build/"
+     */
+    buildroute = argv[1];
+    /*
      * The user must supply a first parameter on the command line to be used as the airportiata string.
      * example airportiata string: "SNN"
      */
-    airportiata = argv[1];
+    airportiata = argv[2];
     /*
      * The user must supply a second parameter on the command line to be used as the conninfo string.
      * example conninfo string: "host = host@endpoint.com user = postgres dbname = airports_database password = password1"
      */
-    conninfo = argv[2];
+    conninfo = argv[3];
 
     /* Make a connection to the database */
     conn = PQconnectdb(conninfo);
 
-    /*  Convert parameter to string for accessing json file name */
+    /* Convert char array parameters to strings for accessing json files */
+    std::string buildroute_s = buildroute;
     std::string airportiata_s = airportiata;
     /*  Open the relevant json file and parse the data within */
-    std::ifstream file("./json/dep_iata_" + airportiata_s + ".json");
+    std::ifstream file(buildroute_s + "json/dep_iata_" + airportiata_s + ".json");
     json j = json::parse(file);
     json parsed = j["data"];
 
