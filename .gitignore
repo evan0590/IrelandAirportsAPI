@@ -16,9 +16,16 @@
 
 # treefrog files and directories
 /api/config
+/api/build
 
 # log files
 *.log
+
+# pri files
+*.pri
+
+# gz files
+*.gz
 
 # Makefiles
 *Makefile
