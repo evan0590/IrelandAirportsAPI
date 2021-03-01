@@ -19,18 +19,15 @@
 /api/.qmake.stash
 /api/Makefile
 
-/api/controllers/.obj
 /api/controllers/Makefile
 
 /api/db
 
-/api/helpers/.obj
 /api/helpers/Makefile
 
 /api/lib
 /api/log
 
-api/models/.obj
 api/models/Makefile
 
 /api/plugin
