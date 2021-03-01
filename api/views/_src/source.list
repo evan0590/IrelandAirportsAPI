@@ -1,0 +1,10 @@
+HEADERS += arrivals_indexView.moc
+SOURCES += arrivals_indexView.cpp
+HEADERS += departures_indexView.moc
+SOURCES += departures_indexView.cpp
+
+# include view files in the project
+views.files += ../arrivals/index.erb
+views.files += ../departures/index.erb
+views.path = .dummy
+INSTALLS += views

@@ -16,22 +16,45 @@
 
 # treefrog files and directories
 /api/config
-/api/.qmake.stash
-/api/Makefile
 
-/api/controllers/Makefile
+# log files
+*.log
 
-/api/db
+# Makefiles
+*Makefile
 
-/api/helpers/Makefile
+# qmake files
+*.qmake.stash
 
-/api/lib
-/api/log
+# Prerequisites
+*.d
 
-api/models/Makefile
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
 
-/api/plugin
-/api/sql
-/api/test
+# Precompiled Headers
+*.gch
+*.pch
 
-api/views/
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app

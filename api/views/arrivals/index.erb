@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<%#include "arrivals.h" %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+
+<h1>Listing Arrivals</h1>
+
+<%== linkTo("Create a new Arrivals", urla("create")) %><br />
+<br />
+<table border="1" cellpadding="5" style="border: 1px #d0d0d0 solid; border-collapse: collapse;">
+  <tr>
+    <th>Airport</th>
+    <th>Airport Iata</th>
+    <th>Airline Name</th>
+    <th>Flight Iata</th>
+    <th>Flight Date</th>
+    <th>Arrival Scheduled</th>
+    <th>Departure Airport</th>
+    <th>Departure Scheduled</th>
+  </tr>
+<% tfetch(QList<Arrivals>, arrivalsList); %>
+<% for (const auto &i : arrivalsList) { %>
+  <tr>
+    <td><%= i.airport() %></td>
+    <td><%= i.airportIata() %></td>
+    <td><%= i.airlineName() %></td>
+    <td><%= i.flightIata() %></td>
+    <td><%= i.flightDate() %></td>
+    <td><%= i.arrivalScheduled() %></td>
+    <td><%= i.departureAirport() %></td>
+    <td><%= i.departureScheduled() %></td>
+    <td>
+      <%== linkTo("Show", urla("show", i.flightIata())) %>
+      <%== linkTo("Edit", urla("save", i.flightIata())) %>
+      <%== linkTo("Remove", urla("remove", i.flightIata()), Tf::Post, "confirm('Are you sure?')") %>
+    </td>
+  </tr>
+<% } %>
+</table>
+
+</body>
+</html>
