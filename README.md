@@ -43,14 +43,14 @@ Results will be returned in JSON array format.
 | Method      | http://[server]/[arrivals/departures]/airline/['airline_name']                            |
 |----------   |:------------------------------------------------------------------------------------------|
 | Description | Method to retrieve all information from the selected table for a given airline.           |
-| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *'airline_name'* - required, is case sensitive, example: Ryanair. Note: spaces between words can be represented with %20, example: Aer%20Lingus |
+| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *'airline_name'* - required, is case sensitive, example: Ryanair. Note: spaces between words can be represented with %20, example: Aer%20Lingus. |
 | Response    | JSON array of all information from the selected table for a given airline.                |
 
 ##### 6. Retrieve Information by Airport on a given Date
 | Method      | http://[server]/[arrivals/departures]/airportdate/['airport_iata']/['yyyy-mm-dd']                                                     |
 |----------   |:------------------------------------------------------------------------------------------|
 | Description | Method to retrieve information from the selected table for a given airport on a given date. |
-| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> *'airport_iata'>'* - required, airport IATA identifier, currently only SNN, ORK and DUB are supported. <br> - *'yyyy-mm-dd'* - required, date string, example: 2021-02-19. |
+| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *'airport_iata'>'* - required, airport IATA identifier, currently only SNN, ORK and DUB are supported. <br> - *'yyyy-mm-dd'* - required, date string, example: 2021-02-19. |
 | Response    | JSON array of information from the selected table for a given airport on a given date.    |
 
 ##### Example query:
