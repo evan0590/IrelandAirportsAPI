@@ -15,42 +15,42 @@ Results will be returned in JSON array format.
 | Method      | http://[server]/[arrivals/departures]                                                     |
 |----------   |:------------------------------------------------------------------------------------------|
 | Description | Method to retrieve all information from either arrivals or departures table of database.  |
-| Parameters  | -   *arrivals/departures* - required, one of the two must be selected                     |
+| Parameters  | -   *arrivals/departures* - required, one of the two must be selected.                    |
 | Response    | JSON array of all information from either the arrivals or departures table.               |
 
 ##### 2. Retrieve Information by Flight IATA
-| Method      | http://[server]/[arrivals/departures]/iata/[<flight_iata>]                                |
+| Method      | http://[server]/[arrivals/departures]/iata/['flight_iata']                                |
 |----------   |:------------------------------------------------------------------------------------------|
 | Description | Method to retrieve information on a flight by a given flight IATA (Internation Air Transport Association) code. |
-| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *<flight_iata>* - required, flight IATA identifier, is case sensitive, example: FR247 |
+| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *'flight_iata'* - required, flight IATA identifier, is case sensitive, example: FR247. |
 | Response    | JSON object containing the information from the relevant row in the selected table. |
 
 ##### 3. Retrieve Information on a given Date
-| Method      | http://[server]/[arrivals/departures]/date/[<yyyy-mm-dd>]                                 |
+| Method      | http://[server]/[arrivals/departures]/date/['yyyy-mm-dd']                                 |
 |----------   |:------------------------------------------------------------------------------------------|
 | Description | Method to retrieve all information from the selected table of database on a given date.   |
-| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *<yyyy-mm-dd>* - required, date string, example: 2021-02-19 |
+| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *'yyyy-mm-dd'* - required, date string, example: 2021-02-19. |
 | Response    | JSON array of all information from the selected table on a given date.                    |
 
 ##### 4. Retrieve Information by Airport
-| Method      | http://[server]/[arrivals/departures]/airport/[<airport_iata>]                            |
+| Method      | http://[server]/[arrivals/departures]/airport/['airport_iata']                            |
 |----------   |:------------------------------------------------------------------------------------------|
 | Description | Method to retrieve all information from the selected table for a given airport.           |
-| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *<airport_iata>* - required, airport IATA identifier, currently only SNN, ORK and DUB are supported |
+| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *'airport_iata'* - required, airport IATA identifier, currently only SNN, ORK and DUB are supported. |
 | Response    | JSON array of all information from the selected table for a given airport.                |
 
 ##### 5. Retrieve Information by Airline
-| Method      | http://[server]/[arrivals/departures]/airline/[<airline_name>]                            |
+| Method      | http://[server]/[arrivals/departures]/airline/['airline_name']                            |
 |----------   |:------------------------------------------------------------------------------------------|
 | Description | Method to retrieve all information from the selected table for a given airline.           |
-| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *<airline_name>* - required, is case sensitive, example: Ryanair. Note: spaces between words can be represented with %20, example: Aer%20Lingus |
+| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> - *'airline_name'* - required, is case sensitive, example: Ryanair. Note: spaces between words can be represented with %20, example: Aer%20Lingus |
 | Response    | JSON array of all information from the selected table for a given airline.                |
 
 ##### 6. Retrieve Information by Airport on a given Date
-| Method      | http://[server]/[arrivals/departures]/airportdate/[<airport_iata>]/[<yyyy-mm-dd>]                                                     |
+| Method      | http://[server]/[arrivals/departures]/airportdate/['airport_iata']/['yyyy-mm-dd']                                                     |
 |----------   |:------------------------------------------------------------------------------------------|
 | Description | Method to retrieve information from the selected table for a given airport on a given date. |
-| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> *<airport_iata>* - required, airport IATA identifier, currently only SNN, ORK and DUB are supported <br> - *<yyyy-mm-dd>* - required, date string, example: 2021-02-19 |
+| Parameters  | -   *arrivals/departures* - required, one of the two must be selected <br> *'airport_iata'>'* - required, airport IATA identifier, currently only SNN, ORK and DUB are supported. <br> - *'yyyy-mm-dd'* - required, date string, example: 2021-02-19. |
 | Response    | JSON array of information from the selected table for a given airport on a given date.    |
 
 ##### Example query:
