@@ -21,12 +21,12 @@ int main(int argc, char **argv)
      */
     buildroute = argv[1];
     /*
-     * The user must supply a first parameter on the command line to be used as the airportiata string.
+     * The user must supply a second parameter on the command line to be used as the airportiata string.
      * example airportiata string: "SNN"
      */
     airportiata = argv[2];
     /*
-     * The user must supply a second parameter on the command line to be used as the conninfo string.
+     * The user must supply a third parameter on the command line to be used as the conninfo string.
      * example conninfo string: "host = host@endpoint.com user = postgres dbname = airports_database password = password1"
      */
     conninfo = argv[3];

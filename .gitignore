@@ -4,7 +4,6 @@
 # source directories not currently versioned
 /database/source-api
 /database/source-postgres
-/database/source-postgres-api/opt/
 
 # local and build directories
 /notes

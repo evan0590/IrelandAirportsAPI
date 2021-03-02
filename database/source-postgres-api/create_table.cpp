@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     PGresult *res;
 
     /*
-     * The user must supply a first parameter on the command line to be used as the conninfo string.
+     * The user must supply a parameter on the command line to be used as the conninfo string.
      * example conninfo string: "host = host@endpoint.com user = postgres dbname = airports_database password = password1"
      */
     conninfo = argv[1];
