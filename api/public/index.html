@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title></title>
+    <style type="text/css">
+        .style1
+        {
+            font-family: Verdana;
+        }
+        .tx
+        {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="font-family: Verdana; font-size: small">
+    <h4 class="style1">
+        Ireland Airport API's information page</h4>
+    <h4>
+        Users can retrieve departures and arrivals data from a selection of Irish airports:</h4>
+    <ul>
+        <li>Dublin (DUB)</li>
+        <li>Shannon (SNN)</li>
+        <li>Cork (ORK)</li>
+    </ul>
+    <h4 class="style1">
+        The following functions are available</h4>
+    <p></p>
+    <p>
+        1. Retrieve All Information - usage:<br>
+        <a href="http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com/arrivals">
+            http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com/arrivals</a>
+        returns JSON array of all information from the arrivals table with 
+        airport, airport_iata, airline_name, flight_iata, flight_date, 
+        arrival_scheduled, departure_airport, departure_scheduled.
+        <br>OR<br> 
+        <a href="http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com/departures">
+            http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com/departures</a> 
+        returns JSON array of all information from the departures table with 
+        airport, airport_iata, airline_name, flight_iata, flight_date, 
+        departure_scheduled, arrival_airport, arrival_scheduled.
+    </p>
+    <p>
+        2. Retrieve Information by Flight IATA - example:<br>
+        <a href="http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com/arrivals/iata/EY45">
+            http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com/arrivals/iata/EY45</a>
+        returns JSON object from the arrivals table with airport, airport_iata, airline_name, 
+        flight_iata, flight_date, arrival_scheduled, departure_airport, departure_scheduled filtered by flight_iata 
+        (Internation Air Transport Association) code. The same approach applies for the departures route.
+    </p>
+    <p>
+        3. Retrieve Information on a given Date - example:<br> 
+        <a href="http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com:80/arrivals/date/2021-02-20">
+            http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com:80/arrivals/date/2021-02-20</a> 
+        returns JSON array from the arrivals table with airport, airport_iata, airline_name, 
+        flight_iata, flight_date, arrival_scheduled, departure_airport, departure_scheduled filtered by flight_date. 
+        The same approach applies for the departures route.
+    </p>
+    <p>
+        4. Retrieve Information by Airport - example:<br>
+        <a href="http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com:80/arrivals/airport/SNN">
+            http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com:80/arrivals/airport/SNN</a>
+        returns JSON array from the arrivals table with airport, airport_iata, airline_name, 
+        flight_iata, flight_date, arrival_scheduled, departure_airport, departure_scheduled filtered by airport_iata. 
+        The same approach applies for the departures route.
+    </p>
+    <p>
+        5. Retrieve Information by Airline - example:<br>
+        <a href="http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com:80/arrivals/airline/Aer%20Lingus">
+            http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com:80/arrivals/airline/Aer%20Lingus</a>
+        returns JSON array from the arrivals table with airport, airport_iata, airline_name, 
+        flight_iata, flight_date, arrival_scheduled, departure_airport, departure_scheduled filtered by airline_name. 
+        The same approach applies for the departures route.
+    </p>
+    <p>
+        6. Retrieve Information by Airport on a given Date - example:<br>
+        <a href="http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com:80/arrivals/airportdate/DUB/2021-02-20">
+            http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com:80/arrivals/airportdate/DUB/2021-02-20</a>
+        returns JSON array from the arrivals table with airport, airport_iata, airline_name, 
+        flight_iata, flight_date, arrival_scheduled, departure_airport, departure_scheduled filtered by airport_iata
+        and flight_date. The same approach applies for the departures route.
+    </p>
+    <p>
+        Please note all these webservice names and parameters are case sensitive<o:p></o:p></p>
+
+</body></html>
