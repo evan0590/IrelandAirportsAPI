@@ -65,7 +65,7 @@ void TestArrivals::getDate_data()
 {
     QTest::addColumn<QString>("flight_date");
 
-    QTest::newRow("No1") << "2021-02-20";
+    QTest::newRow("No2") << "2021-02-20";
 }
 
 void TestArrivals::getDate()
@@ -73,7 +73,7 @@ void TestArrivals::getDate()
     QFETCH(QString, flight_date)
 
     const char test_flight_date[11] = "2021-02-20";
-    Arrivals arrivals = Arrivals::getDate(test_flight_date);
+    QJsonArray arrivals = Arrivals::getDate(test_flight_date);
 
     QCOMPARE(arrivals[0].flightDate(), flight_date)
 }
