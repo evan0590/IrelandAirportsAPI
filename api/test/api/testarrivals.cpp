@@ -74,7 +74,7 @@ void TestArrivals::getDate()
 
     const char test_flight_date[11] = "2021-02-20";
     QJsonArray arrivals = Arrivals::getDate(test_flight_date);
-    Arrivals arrival = Arrivals::Arrivals(arrivals[0]);
+    Arrivals arrival = Arrivals(arrivals[0]);
     QCOMPARE(arrival.flightDate(), flight_date);
 }
 
