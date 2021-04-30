@@ -6,11 +6,11 @@ class TestArrivals : public QObject
 {
     Q_OBJECT
 private slots:
-    void create_data();
-    void get();
+    void getIata_data();
+    void getIata();
 };
 
-void TestArrivals::create_data()
+void TestArrivals::getIata_data()
 {
     QTest::addColumn<QString>("airport");
     QTest::addColumn<QString>("airport_iata");
@@ -32,7 +32,7 @@ void TestArrivals::create_data()
                          << "2021-02-20T07:15:00+00:00";
 }
 
-void TestArrivals::get()
+void TestArrivals::getIata()
 {
     // acquisition of test data
     QFETCH(QString, airport);
