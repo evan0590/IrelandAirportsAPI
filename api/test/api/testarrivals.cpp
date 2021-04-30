@@ -50,6 +50,7 @@ void TestArrivals::getIata()
     // logic of the test
     const char test_flight_iata[6] = "0B155";
     Arrivals arrival = Arrivals::getIata(test_flight_iata); // Getting model flight iata
+    QTextStream(stdout) << arrival.toString() << endl;
 
     // verification of result execution
     QCOMPARE(arrival.airport(), airport);
