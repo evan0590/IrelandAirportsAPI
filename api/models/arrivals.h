@@ -17,10 +17,10 @@ class T_MODEL_EXPORT Arrivals : public TAbstractModel
 public:
     Arrivals();
     Arrivals(const Arrivals &other);
-    Arrivals(const ArrivalsObject &object);
+    Arrivals(const ArrivalsObject &object); // constructor made from the ORM object
     ~Arrivals();
 
-    QString airport() const;
+    QString airport() const; // The following lines are the setter/getter
     void setAirport(const QString &airport);
     QString airportIata() const;
     void setAirportIata(const QString &airportIata);
@@ -39,17 +39,17 @@ public:
     Arrivals &operator=(const Arrivals &other);
 
     /* get functions - start */
-    static Arrivals getIata(const QString &flightIata);
-    static QJsonArray getAirportIata(const QString &airportIata);
-    static QJsonArray getAirlineName(const QString &airlineName);
-    static QJsonArray getDate(const QString &flightDate);
-    static QJsonArray getAirportByDate(const QString &airportIata, const QString &flightDate);
+    static Arrivals getIata(const QString &flightIata);                                        // Gets object specified by flight IATA
+    static QJsonArray getAirportIata(const QString &airportIata);                              // Gets all model objects specified by airport IATA in JSON style
+    static QJsonArray getAirlineName(const QString &airlineName);                              // Gets all model objects specified by airline name in JSON style
+    static QJsonArray getDate(const QString &flightDate);                                      // Gets all model objects specified by flight date in JSON style
+    static QJsonArray getAirportByDate(const QString &airportIata, const QString &flightDate); // Gets all model objects specified by airport IATA and flight date in JSON style
     /* get functions - end */
 
     static QJsonArray getAllJson();
 
 private:
-    QSharedDataPointer<ArrivalsObject> d;
+    QSharedDataPointer<ArrivalsObject> d; // Holds the pointer of the ORM object
 
     TModelObject *modelData() override;
     const TModelObject *modelData() const override;

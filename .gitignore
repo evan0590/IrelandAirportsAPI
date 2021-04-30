@@ -16,6 +16,11 @@
 # treefrog files and directories
 /api/config
 /api/build
+# treefrog testing files
+/test/api/config
+
+# moc files
+*.moc
 
 # log files
 *.log
