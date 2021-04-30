@@ -46,7 +46,6 @@ void TestArrivals::getIata()
 
     // logic of the test
     const char test_flight_iata[6] = "0B155";
-    // std::string test_flight_iata = "0B155";
     Arrivals arrival = Arrivals::getIata(test_flight_iata); // Getting model flight iata
 
     // verification of result execution
@@ -58,6 +57,23 @@ void TestArrivals::getIata()
     QCOMPARE(arrival.arrivalScheduled(), arrival_scheduled);
     QCOMPARE(arrival.departureAirport(), departure_airport);
     QCOMPARE(arrival.departureScheduled(), departure_scheduled);
+}
+
+void TestArrivals::getDate_data()
+{
+    QTest::addColumn<QString>("flight_date");
+
+    QTest::newRow("No1") << "2021-02-20";
+}
+
+void TestArrivals::getDate()
+{
+    QFETCH(QString, flight_date)
+
+    const char test_flight_date[11] = "2021-02-20";
+    Arrivals arrivals = Arrivals::getDate(test_flight_date);
+
+    QCOMPARE(arrivals[0].flightDate(), flight_date)
 }
 
 TF_TEST_MAIN(TestArrivals)  // specify the class name you created
