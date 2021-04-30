@@ -1,6 +1,7 @@
 #include <TfTest/TfTest>
 #include "models/arrivals.h" //  include the model class
 #include <iostream>
+#include <QDebug>
 
 class TestArrivals : public QObject
 {
@@ -75,7 +76,7 @@ void TestArrivals::getDate()
     const char test_flight_date[11] = "2021-02-20";
     QString test_flight_date_s = "2021-02-20";
     QJsonArray arrivals = Arrivals::getDate(test_flight_date);
-    std::cout << arrivals[0].toString() << endl;
+    qInfo() << arrivals[0].toString();
     QVERIFY(arrivals[0].toString().contains(test_flight_date_s));
     QVERIFY(arrivals.size() > 0);
     // Arrivals arrival = Arrivals(arrivals[0]);
