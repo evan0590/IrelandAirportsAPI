@@ -76,7 +76,7 @@ void TestArrivals::getDate()
     const char test_flight_date[11] = "2021-02-20";
     QString test_flight_date_s = "2021-02-20";
     QJsonArray arrivals = Arrivals::getDate(test_flight_date);
-    QTextStream(stdout) << arrivals.toString() << endl;
+    QTextStream(stdout) << arrivals.first().toString() << endl;
     QVERIFY(arrivals[0].toString().contains(test_flight_date_s));
     QVERIFY(arrivals.size() > 0);
     // Arrivals arrival = Arrivals(arrivals[0]);
