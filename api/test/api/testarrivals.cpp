@@ -73,10 +73,12 @@ void TestArrivals::getDate()
 {
     QFETCH(QString, flight_date);
 
-    const char test_flight_date[11] = "2021-02-20";
+    // const char test_flight_date[11] = "2021-02-20";
+    QString test_flight_date = "2021-02-20";
     // QString test_flight_date_s = "2021-02-20";
     QJsonArray arrivals = Arrivals::getDate(test_flight_date);
-    QTextStream(stdout) << arrivals.first().toString().size() << " here" << endl;
+    QTextStream(stdout) << arrivals.size() << " here" << endl;
+    // QTextStream(stdout) << arrivals.first().toString().size() << " here" << endl;
     // QVERIFY(arrivals.first().toString().contains(test_flight_date_s));
     QVERIFY(arrivals.size() > 0);
     // Arrivals arrival = Arrivals(arrivals[0]);
