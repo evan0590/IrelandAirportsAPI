@@ -9,12 +9,15 @@ class TestArrivals : public QObject
 private slots:
     void getIata_data();
     void getIata();
-    void getDate_data();
-    void getDate();
+    void getAirlineName_data();
+    void getAirlineName();
+    void getAirportByDate_data();
+    void getAirportByDate();
 };
 
 void TestArrivals::getIata_data()
 {
+    // definition of test data
     QTest::addColumn<QString>("airport");
     QTest::addColumn<QString>("airport_iata");
     QTest::addColumn<QString>("airline_name");
@@ -25,14 +28,14 @@ void TestArrivals::getIata_data()
     QTest::addColumn<QString>("departure_scheduled");
 
     // adding to test data
-    QTest::newRow("No1") << "Dublin International"
-                         << "DUB"
-                         << "Blue Air"
-                         << "0B155"
-                         << "2021-02-20"
-                         << "2021-02-20T09:15:00+00:00"
-                         << "Henri Coanda International"
-                         << "2021-02-20T07:15:00+00:00";
+    QTest::newRow("Test flight IATA") << "Dublin International"
+                                      << "DUB"
+                                      << "Blue Air"
+                                      << "0B155"
+                                      << "2021-02-20"
+                                      << "2021-02-20T09:15:00+00:00"
+                                      << "Henri Coanda International"
+                                      << "2021-02-20T07:15:00+00:00";
 }
 
 void TestArrivals::getIata()
@@ -62,38 +65,69 @@ void TestArrivals::getIata()
     QCOMPARE(arrival.departureScheduled(), departure_scheduled);
 }
 
-void TestArrivals::getDate_data()
+void TestArrivals::getAirlineName_data()
 {
-    QTest::addColumn<QString>("flight_date");
+    // definition of test data
+    QTest::addColumn<QString>("airline_name");
 
-    QTest::newRow("No2") << "2021-02-20";
+    // adding to test data
+    QTest::newRow("Test airline name") << "Aer Lingus";
 }
 
-void TestArrivals::getDate()
+void TestArrivals::getAirlineName()
 {
-    QFETCH(QString, flight_date);
+    // acquisition of test data
+    QFETCH(QString, airline_name);
 
-    // const char test_flight_date[11] = "2021-02-20";
-    QString test_flight_date = "2021-02-20";
-    // QString test_flight_date_s = "2021-02-20";
-    QJsonArray arrivals = Arrivals::getDate(test_flight_date);
-    QTextStream(stdout) << arrivals.size() << " here" << endl;
-    QTextStream(stdout) << arrivals.first()
-                               .toObject()
-                               .value(arrivals.first()
-                                          .toObject()
-                                          .keys()[6])
-                               .toString()
-                        << "string here" << endl;
-    // QTextStream(stdout) << arrivals.first().toString().size() << " here" << endl;
-    // QVERIFY(arrivals.first().toString().contains(test_flight_date_s));
-    QVERIFY(arrivals.size() > 0);
-    // Arrivals arrival = Arrivals(arrivals[0]);
+    // logic of the test
+    QString test_airline_name = "Aer Lingus";
+    QJsonArray arrivals = Arrivals::getAirlineName(test_airline_name);
+
+    // verification of result execution
     QCOMPARE(arrivals.first()
                  .toObject()
                  .value(arrivals.first()
                             .toObject()
-                            .keys()[6])
+                            .keys()[0]) // grab the airline name of the first element of the array of JSON objects
+                 .toString(),
+             airline_name);
+}
+
+void TestArrivals::getAirportByDate_data()
+{
+    // definition of test data
+    QTest::addColumn<QString>("airport_iata");
+    QTest::addColumn<QString>("flight_date");
+
+    // adding to test data
+    QTest::newRow("Test airport by flight date") << "SNN"
+                                                 << "2021-02-20";
+}
+
+void TestArrivals::getAirportByDate()
+{
+    // acquisition of test data
+    QFETCH(QString, airport_iata);
+    QFETCH(QString, flight_date);
+
+    // logic of the test
+    QString test_airport_iata = "SNN";
+    QString test_flight_date = "2021-02-20";
+    QJsonArray arrivals = Arrivals::getAirportByDate(test_airport_iata, test_flight_date);
+
+    // verification of result execution
+    QCOMPARE(arrivals.first()
+                 .toObject()
+                 .value(arrivals.first()
+                            .toObject()
+                            .keys()[2]) // grab the airport iata of the first element of the array
+                 .toString(),
+             airport_iata);
+    QCOMPARE(arrivals.first()
+                 .toObject()
+                 .value(arrivals.first()
+                            .toObject()
+                            .keys()[6]) // grab the flight date of the first element of the array
                  .toString(),
              flight_date);
 }
