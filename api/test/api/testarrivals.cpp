@@ -8,6 +8,8 @@ class TestArrivals : public QObject
 private slots:
     void getIata_data();
     void getIata();
+    void getDate_data();
+    void getDate();
 };
 
 void TestArrivals::getIata_data()
