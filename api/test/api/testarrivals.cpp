@@ -83,7 +83,7 @@ void TestArrivals::getDate()
                                .value(arrivals.first()
                                           .toObject()
                                           .keys()[4])
-                               .type()
+                               .toString()
                         << "string here" << endl;
     // QTextStream(stdout) << arrivals.first().toString().size() << " here" << endl;
     // QVERIFY(arrivals.first().toString().contains(test_flight_date_s));
