@@ -70,7 +70,7 @@ void TestArrivals::getDate_data()
 
 void TestArrivals::getDate()
 {
-    QFETCH(QString, flight_date)
+    QFETCH(QString, flight_date);
 
     const char test_flight_date[11] = "2021-02-20";
     QJsonArray arrivals = Arrivals::getDate(test_flight_date);
