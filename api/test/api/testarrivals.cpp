@@ -82,14 +82,20 @@ void TestArrivals::getDate()
                                .toObject()
                                .value(arrivals.first()
                                           .toObject()
-                                          .keys()[4])
+                                          .keys()[6])
                                .toString()
                         << "string here" << endl;
     // QTextStream(stdout) << arrivals.first().toString().size() << " here" << endl;
     // QVERIFY(arrivals.first().toString().contains(test_flight_date_s));
     QVERIFY(arrivals.size() > 0);
     // Arrivals arrival = Arrivals(arrivals[0]);
-    // QCOMPARE(arrival.flightDate(), flight_date);
+    QCOMPARE(arrivals.first()
+                 .toObject()
+                 .value(arrivals.first()
+                            .toObject()
+                            .keys()[6])
+                 .toString(),
+             flight_date);
 }
 
 TF_TEST_MAIN(TestArrivals)  // specify the class name you created
