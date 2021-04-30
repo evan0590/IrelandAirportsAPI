@@ -17,7 +17,7 @@
 /api/config
 /api/build
 # treefrog testing files
-/test/api/config
+api/test/api/config
 
 # moc files
 *.moc
