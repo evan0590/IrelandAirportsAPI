@@ -66,7 +66,7 @@ Results will be returned in JSON array format.
 
 ##### Example query:
 
-http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com/arrivals/airportdate/SNN/2021-02-19
+~~http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com/arrivals/airportdate/SNN/2021-02-19~~
 
 ##### Example response:
 
