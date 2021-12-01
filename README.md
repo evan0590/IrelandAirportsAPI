@@ -10,11 +10,11 @@ and allows users to retrieve departures and arrivals data from a selection of Ir
 A number of methods are available, each of which will be invoked using HTTP Request (GET method).
 Results will be returned in JSON array format.
 
-[Homepage](http://ec2-52-19-19-167.eu-west-1.compute.amazonaws.com)
+[CURRENTLY OFFLINE]
 
 ### Methods
 
-[server] = 'ec2-52-19-19-167.eu-west-1.compute.amazonaws.com'
+[server] = ~~'ec2-52-19-19-167.eu-west-1.compute.amazonaws.com'~~
 
 #### 1. Retrieve All Information
 
